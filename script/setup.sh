@@ -21,4 +21,11 @@ if [[ $CI != "true" ]]; then
 	pre-commit install --hook-type commit-msg
 fi
 
+if ! command -v air &>/dev/null; then
+	# https://github.com/cosmtrek/air#installation
+	# binary will be $(go env GOPATH)/bin/air
+	curl -sSfL https://raw.githubusercontent.com/cosmtrek/air/master/install.sh | sh -s -- -b $(go env GOPATH)/bin
+	air -v
+fi
+
 echo -e "$COLOR_GREEN✅  Done\n$COLOR_RESET"

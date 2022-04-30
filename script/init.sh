@@ -1,10 +1,14 @@
 #!/usr/bin/env bash
 
+# Bash color variables
+COLOR_GREEN="\x1b[32;01m"
+COLOR_RESET="\x1b[39;49;00m"
+
 # shellcheck disable=SC2155
 export REPO_DIR="$(dirname "$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)")"
 
 function prepare {
-	echo "initing"
+	echo -e "🚀  Initializing $REPO_NAME project...$COLOR_RESET"
 }
 
 function get_user_input {
@@ -34,13 +38,18 @@ function setup_structure {
 		;;
 	*)
 		echo "Not adding CLI tool"
+		rm -rf "$REPO_DIR"/script/install.sh "$REPO_DIR"/script/release.sh
 		;;
 	esac
+
+	rm -rf "$REPO_DIR"/script/init.sh
 }
 
 function post {
 	"$REPO_DIR"/script/setup.sh
-	echo "DONE!"
+	pre-commit run --all-files
+	git add "$REPO_DIR" && git commit --am "feat: init $REPO_NAME project" && git push -f
+	echo -e "$COLOR_GREEN✅  Done\n$COLOR_RESET"
 }
 
 prepare
