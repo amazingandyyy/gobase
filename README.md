@@ -47,7 +47,7 @@ __REPO_NAME__
 ```sh
 git clone https://github.com/amazingandyyy/__REPO_NAME__.git
 cd __REPO_NAME__
-./scripts/init
+./script/setup.sh
 ```
 
 ### Trigger pre-commit hook manually
