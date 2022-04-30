@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+# shellcheck disable=SC2155
+export REPO_DIR="$(dirname "$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)")"
+
 function prepare {
 	echo "initing"
 }
@@ -36,6 +39,7 @@ function setup_structure {
 }
 
 function post {
+	"$REPO_DIR"/script/setup.sh
 	echo "DONE!"
 }
 
